@@ -1,0 +1,5 @@
+applications:
+  - name: my-rest-api
+    command: rest-api
+    env:
+      GOPACKAGENAME: github.com/adewahyu123/rest-api
