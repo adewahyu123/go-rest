@@ -18,8 +18,12 @@ type Address struct {
     City  string `json:"city,omitempty"`
     State string `json:"state,omitempty"`
 }
+type Subscriber struct {
+    SubscriberID string `json:"subscriberid,omitempty"`
+}
 
 var people []Person
+var msisdn []Subscriber
 
 // Display all from the people var
 func GetPeople(w http.ResponseWriter, r *http.Request) {
@@ -60,11 +64,17 @@ func DeletePerson(w http.ResponseWriter, r *http.Request) {
     }
 }
 
+//Add Sample any changes new endpoint
+func SampleNewFunction(w http.ResponseWriter, r *http.Request) {
+    json.NewEncoder(w).Encode(msisdn)
+}
 // main function to boot up everything
 func main() {
     router := mux.NewRouter()
     people = append(people, Person{ID: "1", Firstname: "John", Lastname: "Doe", Address: &Address{City: "City X", State: "State X"}})
     people = append(people, Person{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &Address{City: "City Z", State: "State Y"}})
+    msisdn = append(msisdn, Subscriber{SubscriberID:"087889420787"})
+    router.HandleFunc("/test", SampleNewFunction).Methods("GET")
     router.HandleFunc("/people", GetPeople).Methods("GET")
     router.HandleFunc("/people/{id}", GetPerson).Methods("GET")
     router.HandleFunc("/people/{id}", CreatePerson).Methods("POST")
