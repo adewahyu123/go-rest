@@ -11,8 +11,8 @@
 
 - test: # create entity
     - name: "Basic get"
-    - url: "/people"
-    - variable_binds: {'id': 1, 'firstname': 'John'}
+    - url: "/test"
+    - method: "GET"
 
 
 
